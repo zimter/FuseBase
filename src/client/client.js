@@ -1,5 +1,4 @@
-const defaultGpuOpts = {
-};
+const nodeJsIp = "http://localhost:3000";
 
 let socket;
 let loaded = []
@@ -58,7 +57,7 @@ function loadRemoteFunctionDeps(remoteFunction, callback, ii) {
 
 // Actual code starts here
 function client() {
-    socket = io("http://localhost:3000");
+    socket = io(nodeJsIp);
 	
 	socket.emit("postConnection", "slave");
 	
