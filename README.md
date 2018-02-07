@@ -20,4 +20,4 @@ Remember that running malicious code on someone's machine without their knowledg
 3. Get into the W.I.P Control Panel `yourip:3000`
 
 ## Step 3: Use existing modules or write your own:
-See the (wiki)[https://github.com/lukas2005/FuseBase/wiki]
+See the [wiki](https://github.com/lukas2005/FuseBase/wiki)
