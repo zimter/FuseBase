@@ -1,0 +1,25 @@
+{
+  "name": "FuseBase",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/server/index.js",
+  "scripts": {
+    "start": "nodemon -w \"package.json\" -w \"src/server\" --exec \"genversion version.js && node src/server/index.js\"",
+    "test": "cd src/client && python -m http.server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "???"
+  },
+  "author": "lukas2005",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pug": "^2.0.0-rc.4",
+    "request": "^2.83.0",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "genversion": "^2.0.1"
+  }
+}
