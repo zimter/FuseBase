@@ -45,16 +45,16 @@ io.on('connection', function(socket) {
 	console.log('new connection from: '+ ip);
 	
 	socket.debugExecFunc = debug;
-	socket.executeFunc = function(module, funcName, args, debug, callback) {
+	socket.executeFunc = function(module, funcName, args, callback) {
 		let finalObj = {};
 		
 		finalObj.func = module.remoteFunctions[funcName].toString();
 		finalObj.args = args;
 		finalObj.deps = module.deps
 		
-		this.emit("executeRemoteFunction", finalObj, this.debugExecFunc);
+		this.emit("executeRemoteFunction", finalObj, this.debugExecFunc, funcName);
 		
-		this.on("remoteFunctionOut", function(out) {
+		this.on(funcName+"Out", function(out) {
 			if (callback != null) callback(out);
 		});
 	}	
@@ -82,7 +82,7 @@ io.on('connection', function(socket) {
 					socket.country = json["geoplugin_countryName"];
 					if (slaveCountries.indexOf(socket.country) == -1) slaveCountries.push(socket.country);
 				});
-				debugger;
+				
 				M.ExampleModule.exec(socket);
 		} else {
 			socket.on('updateClientData', function() {

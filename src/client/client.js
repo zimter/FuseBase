@@ -61,10 +61,10 @@ function client() {
 	
 	socket.emit("postConnection", "slave");
 	
-	socket.on("executeRemoteFunction", function(remoteFunction, debug) {
+	socket.on("executeRemoteFunction", function(remoteFunction, debug, funcName) {
 		loadRemoteFunctionDeps(remoteFunction, function() {
 			let remoteFunctionOut = eval("(" + remoteFunction.func + ")(remoteFunction.args, debug)");
-			socket.emit("remoteFunctionOut", remoteFunctionOut);
+			socket.emit(funcName+"Out", remoteFunctionOut);
 		});
 	});
 }
