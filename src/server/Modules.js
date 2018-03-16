@@ -4,7 +4,11 @@ const fs = require('fs');
 const pluginFolder = "./plugins/";
 const pluginFolderRelative = "../../plugins/";
 
+const modules = [];
+
 fs.readdirSync(pluginFolder).forEach(file => {
 	let module = require(pluginFolderRelative+file);
-	console.log(module.config);
+	modules.push(module);
 });
+
+module.exports = modules;
