@@ -6,8 +6,8 @@ let loaded = []
 let lock = false;
 function loadScript(url, integrity, callback, callbackParams) {
     // Adding the script tag to the head as suggested before
-    var head = document.getElementsByTagName('head')[0];
-    var script = document.createElement('script');
+    let head = document.getElementsByTagName('head')[0];
+    let script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = url;
 	if (integrity != null) {
@@ -44,7 +44,7 @@ function loadScript(url, integrity, callback, callbackParams) {
 }
 
 // Script loading
-loadScript("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js", "sha256-WPeFPWD3PZQUDrpFnDM1N2KadNVwCfNS4cCZ78b76T8=", function() {
+loadScript("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js", null, function() {
 	client();
 });
 
